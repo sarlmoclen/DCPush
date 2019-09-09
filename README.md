@@ -37,7 +37,7 @@ public class MyApp extends Application {
 }
 ```
  
-自定义receiver并静态注册（8.0静态注册广播以及适配），receiver监听连接状态，返回收到数据
+自定义receiver并静态注册（8.0静态注册广播已经适配），receiver监听连接状态，返回收到数据
 
 ```java
 
