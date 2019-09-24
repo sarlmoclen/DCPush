@@ -23,7 +23,7 @@ publish {
     repoName = 'dc'
     groupId = 'com.sarlmoclen.dcpush'
     artifactId = 'DCPush'
-    publishVersion = '1.0.0'
+    publishVersion = '1.0.1'
     desc = 'this is a push framework'
     website = 'https://github.com/sarlmoclen/DCPush'
 }
