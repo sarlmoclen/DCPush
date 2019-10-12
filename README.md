@@ -8,7 +8,7 @@
 在你的项目根工程bulid.gradle中添加，让所有工程都依赖SRouter
  
 ```gradle
-api 'com.sarlmoclen.dcpush:DCPush:1.0.1'
+api 'com.sarlmoclen.dcpush:DCPush:1.0.2'
 ```
 
 在自定义Application中初始化
@@ -44,23 +44,27 @@ public class MyApp extends Application {
 public class DCReceiver extends DCWebSocketReceiver {
 
     @Override
-    protected void onOpen(Context context, String data) {
-        DCLog.log(TAG, "onOpen()-data:" + data);
+    protected void onOpen(Context context, short httpStatus, String httpStatusMessage) {
+        DCLog.log(TAG, "onOpen()-httpStatus:" + httpStatus + "-httpStatusMessage:" + httpStatusMessage);
+        send(context, "onOpen()-httpStatus:" + httpStatus + "-httpStatusMessage:" + httpStatusMessage);
     }
 
     @Override
-    protected void onMessage(Context context, String data) {
-        DCLog.log(TAG, "onMessage()-data:" + data);
+    protected void onMessage(Context context, String message) {
+        DCLog.log(TAG, "onMessage()-message:" + message);
+        send(context, "onMessage()-message:" + message);
     }
 
     @Override
-    protected void onClose(Context context, String data) {
-        DCLog.log(TAG, "onClose()-data:" + data);
+    protected void onClose(Context context, int code, String reason, boolean remote) {
+        DCLog.log(TAG, "onClose()-code:" + code + "-reason:" + reason + "-remote:" + remote);
+        send(context, "onClose()-code:" + code + "-reason:" + reason + "-remote:" + remote);
     }
 
     @Override
-    protected void onError(Context context, String data) {
-        DCLog.log(TAG, "onError()-data:" + data);
+    protected void onError(Context context, Exception ex) {
+        DCLog.log(TAG, "onError()-ex:" + ex.toString());
+        send(context, "onError()-ex:" + ex.toString());
     }
 
 }
