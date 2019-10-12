@@ -1,5 +1,5 @@
 # DCPush
-![](https://img.shields.io/badge/release-1.0.1-brightgreen.svg)
+![](https://img.shields.io/badge/release-1.0.2-brightgreen.svg)
 
 推送框架
 
