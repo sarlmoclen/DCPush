@@ -119,7 +119,7 @@ public class DCWebSocketManager {
                 super.onMessage(message);
                 DCWebSocketResult dcWebSocketResult = new DCWebSocketResult();
                 dcWebSocketResult.setFlag(MESSAGE);
-                dcWebSocketResult.setData(message);
+                dcWebSocketResult.setMessage(message);
                 sendBroadcast(dcWebSocketResult);
             }
 
@@ -128,7 +128,8 @@ public class DCWebSocketManager {
                 super.onOpen(handshakedata);
                 DCWebSocketResult dcWebSocketResult = new DCWebSocketResult();
                 dcWebSocketResult.setFlag(OPEN);
-                dcWebSocketResult.setData(handshakedata.getHttpStatusMessage());
+                dcWebSocketResult.setHttpStatus(handshakedata.getHttpStatus());
+                dcWebSocketResult.setHttpStatusMessage(handshakedata.getHttpStatusMessage());
                 sendBroadcast(dcWebSocketResult);
             }
 
@@ -137,7 +138,9 @@ public class DCWebSocketManager {
                 super.onClose(code, reason, remote);
                 DCWebSocketResult dcWebSocketResult = new DCWebSocketResult();
                 dcWebSocketResult.setFlag(CLOSE);
-                dcWebSocketResult.setData("code:" + code + "&reason:" + reason + "&remote:" + remote);
+                dcWebSocketResult.setCode(code);
+                dcWebSocketResult.setReason(reason);
+                dcWebSocketResult.setRemote(remote);
                 sendBroadcast(dcWebSocketResult);
             }
 
@@ -146,7 +149,7 @@ public class DCWebSocketManager {
                 super.onError(ex);
                 DCWebSocketResult dcWebSocketResult = new DCWebSocketResult();
                 dcWebSocketResult.setFlag(ERROR);
-                dcWebSocketResult.setData(ex.toString());
+                dcWebSocketResult.setException(ex);
                 sendBroadcast(dcWebSocketResult);
             }
         };

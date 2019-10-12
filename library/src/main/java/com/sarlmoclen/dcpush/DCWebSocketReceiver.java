@@ -10,25 +10,25 @@ public abstract class DCWebSocketReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         DCWebSocketResult dcWebSocketResult = (DCWebSocketResult) intent.getSerializableExtra(DCWebSocketManager.EXTRA);
         if(dcWebSocketResult.getFlag() == DCWebSocketManager.OPEN){
-            onOpen(context, dcWebSocketResult.getData());
+            onOpen(context, dcWebSocketResult.getHttpStatus(), dcWebSocketResult.getHttpStatusMessage());
         }
         if(dcWebSocketResult.getFlag() == DCWebSocketManager.MESSAGE){
-            onMessage(context, dcWebSocketResult.getData());
+            onMessage(context, dcWebSocketResult.getMessage());
         }
         if(dcWebSocketResult.getFlag() == DCWebSocketManager.CLOSE){
-            onClose(context, dcWebSocketResult.getData());
+            onClose(context, dcWebSocketResult.getCode(), dcWebSocketResult.getReason(), dcWebSocketResult.isRemote());
         }
         if(dcWebSocketResult.getFlag() == DCWebSocketManager.ERROR){
-            onError(context, dcWebSocketResult.getData());
+            onError(context, dcWebSocketResult.getException());
         }
     }
 
-    protected abstract void onOpen(Context context, String data);
+    protected abstract void onOpen(Context context, short httpStatus, String httpStatusMessage);
 
-    protected abstract void onMessage(Context context, String data);
+    protected abstract void onMessage(Context context, String message);
 
-    protected abstract void onClose(Context context, String data);
+    protected abstract void onClose(Context context, int code, String reason, boolean remote);
 
-    protected abstract void onError(Context context, String data);
+    protected abstract void onError(Context context, Exception ex);
 
 }
