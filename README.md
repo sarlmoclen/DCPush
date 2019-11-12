@@ -1,5 +1,5 @@
 # DCPush
-![](https://img.shields.io/badge/release-1.0.2-brightgreen.svg)
+![](https://img.shields.io/badge/release-1.0.3-brightgreen.svg)
 
 推送框架
 
@@ -8,7 +8,7 @@
 在你的项目根工程bulid.gradle中添加，让所有工程都依赖SRouter
  
 ```gradle
-api 'com.sarlmoclen.dcpush:DCPush:1.0.2'
+api 'com.sarlmoclen.dcpush:DCPush:1.0.3'
 ```
 
 在自定义Application中初始化
