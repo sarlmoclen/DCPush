@@ -75,12 +75,15 @@ public class DCWebSocketManager {
         return Holder.INSTANCE;
     }
 
-    public DCWebSocketManager init(Context context, String uriContent){
-        this.context = context;
-        uri = URI.create(uriContent);
+    DCWebSocketManager(){
         socketThread = new HandlerThread(TAG);
         socketThread.start();
         mHandler = new Handler(socketThread.getLooper());
+    }
+
+    public DCWebSocketManager init(Context context, String uriContent){
+        this.context = context;
+        uri = URI.create(uriContent);
         return this;
     }
 
