@@ -224,7 +224,11 @@ public class DCWebSocketManager {
 
     public void sendMessage(String message){
         if (dcWebSocketClient != null && dcWebSocketClient.isOpen()) {
-            dcWebSocketClient.send(message);
+            try {
+                dcWebSocketClient.send(message);
+            }catch (Exception e){
+                DCLog.log(TAG, e.toString());
+            }
         } else {
             DCLog.log(TAG, "sendMessage()-fail");
         }
