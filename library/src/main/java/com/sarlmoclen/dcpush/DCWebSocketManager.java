@@ -189,19 +189,22 @@ public class DCWebSocketManager {
     }
 
     private void sendBroadcast(DCWebSocketResult dcWebSocketResult){
-        Intent intent = new Intent();
-        intent.putExtra(EXTRA,dcWebSocketResult);
-        intent.setAction(ACTION);
-        String packageName = context.getPackageName();
-        List<ResolveInfo> receivers = context.getPackageManager().queryBroadcastReceivers(new Intent(ACTION), 0);
-        for (ResolveInfo resolveInfo : receivers){
-            String pName = resolveInfo.activityInfo.packageName;
-            String name = resolveInfo.activityInfo.name;
-            if(packageName.equals(pName)){
-                intent.setComponent(new ComponentName(pName,name));
-                context.sendBroadcast(intent);
-                break;
+        try {
+            Intent intent = new Intent();
+            intent.putExtra(EXTRA,dcWebSocketResult);
+            intent.setAction(ACTION);
+            String packageName = context.getPackageName();
+            List<ResolveInfo> receivers = context.getPackageManager().queryBroadcastReceivers(new Intent(ACTION), 0);
+            for (ResolveInfo resolveInfo : receivers){
+                String pName = resolveInfo.activityInfo.packageName;
+                String name = resolveInfo.activityInfo.name;
+                if(packageName.equals(pName)){
+                    intent.setComponent(new ComponentName(pName,name));
+                    context.sendBroadcast(intent);
+                    break;
+                }
             }
+        }catch (Exception e){
         }
     }
 
