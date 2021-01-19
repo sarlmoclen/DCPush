@@ -35,6 +35,15 @@ public class DCWebSocketManager {
     private HandlerThread socketThread;
     private Handler mHandler;
     private DCRunnable dcRunnable;
+    private HeartListener heartListener;
+
+    public interface HeartListener{
+        void heartRequest();
+    }
+
+    public void setHeartListener(HeartListener heartListener){
+        this.heartListener = heartListener;
+    }
 
     public class DCRunnable implements Runnable{
 
@@ -63,6 +72,9 @@ public class DCWebSocketManager {
             //定时对长连接进行心跳检测
             DCLog.log(TAG, "HEART-NORMAL");
             heart();
+            if(heartListener != null){
+                heartListener.heartRequest();
+            }
             mHandler.postDelayed(this, heartBeatRate);
         }
     }
