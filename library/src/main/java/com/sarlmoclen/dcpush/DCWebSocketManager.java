@@ -41,8 +41,9 @@ public class DCWebSocketManager {
         void heartRequest();
     }
 
-    public void setHeartListener(HeartListener heartListener){
+    public DCWebSocketManager setHeartListener(HeartListener heartListener){
         this.heartListener = heartListener;
+        return this;
     }
 
     public class DCRunnable implements Runnable{
@@ -54,6 +55,9 @@ public class DCWebSocketManager {
             if(!isRunning){
                 //防止主动关闭dcWebSocketClient，置为null,消息后执行,导致再次打开
                 return;
+            }
+            if(heartListener != null){
+                heartListener.heartRequest();
             }
             if (dcWebSocketClient != null) {
                 if (dcWebSocketClient.isClosed()) {
@@ -72,9 +76,6 @@ public class DCWebSocketManager {
             //定时对长连接进行心跳检测
             DCLog.log(TAG, "HEART-NORMAL");
             heart();
-            if(heartListener != null){
-                heartListener.heartRequest();
-            }
             mHandler.postDelayed(this, heartBeatRate);
         }
     }
