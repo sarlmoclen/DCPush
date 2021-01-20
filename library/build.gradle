@@ -6,8 +6,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 29
-        versionCode 7
-        versionName "1.0.7"
+        versionCode 9
+        versionName "1.0.8"
     }
 }
 
@@ -23,7 +23,7 @@ publish {
     repoName = 'dc'
     groupId = 'com.sarlmoclen.dcpush'
     artifactId = 'DCPush'
-    publishVersion = '1.0.7'
+    publishVersion = '1.0.8'
     desc = 'this is a push framework'
     website = 'https://github.com/sarlmoclen/DCPush'
 }
